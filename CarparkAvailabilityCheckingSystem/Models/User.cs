@@ -8,7 +8,6 @@ namespace CarparkAvailabilityCheckingSystem.Models
 {
     public class User
     {
-
         public User() { }
 
         [Key]

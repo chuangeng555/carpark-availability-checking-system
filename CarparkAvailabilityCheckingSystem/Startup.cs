@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using CarparkAvailabilityCheckingSystem.Models;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using CarparkAvailabilityCheckingSystem.Services;
+using CarparkAvailabilityCheckingSystem.Repositories;
 
 namespace CarparkAvailabilityCheckingSystem
 {
@@ -27,6 +29,10 @@ namespace CarparkAvailabilityCheckingSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+
 
             //check if it exist b4 , inject service of Usercontext
             services.AddDbContextPool<UserContext>(o => o.UseSqlServer(Configuration.GetConnectionString("UsersDBConnection")));
