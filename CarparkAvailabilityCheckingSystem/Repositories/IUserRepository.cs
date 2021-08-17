@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CarparkAvailabilityCheckingSystem.Models;
+using CarparkAvailabilityCheckingSystem.Entities;
 
 namespace CarparkAvailabilityCheckingSystem.Repositories
 {
@@ -12,5 +12,8 @@ namespace CarparkAvailabilityCheckingSystem.Repositories
         Task<IEnumerable<User>> Get();
         Task<User> Create(User user);
         Task<User> Get(Guid id);
+
+        bool CheckEmailExist(User user);
+
     }
 }

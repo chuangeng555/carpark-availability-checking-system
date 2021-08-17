@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace CarparkAvailabilityCheckingSystem.Models
+namespace CarparkAvailabilityCheckingSystem.Entities
 {
     public class User
     {
@@ -23,11 +23,14 @@ namespace CarparkAvailabilityCheckingSystem.Models
         public string Email { get; set; }
 
         [Required]
-        [MinLength(8, ErrorMessage = "Password more than 8 char")]
-        public string Password { get; set; }
+        public byte[] PasswordHash { get; set; }
+
+        [Required]
+        public byte[] PasswordSalt { get; set; }
 
         [MinLength(8, ErrorMessage = "Number more than 8")]
         public string Contact { get; set; }
+
     }
 
 

@@ -9,11 +9,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CarparkAvailabilityCheckingSystem.Models;
+using CarparkAvailabilityCheckingSystem.Entities;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using CarparkAvailabilityCheckingSystem.Services;
 using CarparkAvailabilityCheckingSystem.Repositories;
+using AutoMapper;
+using CarparkAvailabilityCheckingSystem.Helpers;
 
 namespace CarparkAvailabilityCheckingSystem
 {
@@ -33,10 +35,11 @@ namespace CarparkAvailabilityCheckingSystem
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             //check if it exist b4 , inject service of Usercontext
             services.AddDbContextPool<UserContext>(o => o.UseSqlServer(Configuration.GetConnectionString("UsersDBConnection")));
-
+            
             services.AddControllers();
 
             services.AddSwaggerGen(c =>

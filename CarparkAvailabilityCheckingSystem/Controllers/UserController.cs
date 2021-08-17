@@ -6,7 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using CarparkAvailabilityCheckingSystem.Services;
 using CarparkAvailabilityCheckingSystem.Models;
-using CarparkAvailabilityCheckingSystem.Repositories;
+using CarparkAvailabilityCheckingSystem.Entities;
+using CarparkAvailabilityCheckingSystem.Helpers;
+using AutoMapper;
+
 
 namespace CarparkAvailabilityCheckingSystem.Controllers
 {
@@ -14,20 +17,22 @@ namespace CarparkAvailabilityCheckingSystem.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository _userRepo; 
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-
-        public UserController(IUserService userService, IUserRepository userRepo)
+        public UserController(IUserService userService, IMapper mapper)
         {
+            _mapper = mapper; 
             _userService = userService;
-            _userRepo = userRepo;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IList<UserModel>> GetUsers()
         {
-            return await _userService.GetAllUsers();
+            var users = await _userService.GetAllUsers();
+            var model = _mapper.Map<IList<UserModel>>(users);
+            return model;
+
         }
 
         [HttpGet("{id}")]
@@ -37,10 +42,21 @@ namespace CarparkAvailabilityCheckingSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser([FromBody] User user)
+        public async Task<ActionResult<User>> PostUser([FromBody] RegistrationModel model)
         {
-            var newUser = await _userService.CreateUser(user);
-            return CreatedAtAction(nameof(GetUser), new { id = newUser.Id }, newUser);
+
+            // map model to entity
+            var user = _mapper.Map<User>(model);
+
+            try
+            {
+                var newUser = await _userService.CreateUser(user, model.Password);
+                return CreatedAtAction(nameof(GetUser), new { id = newUser.Id }, newUser);
+            } catch(ApplicationException ae)
+            {
+                return BadRequest(new { message = ae.Message });
+            }
         }
+
     }
 }

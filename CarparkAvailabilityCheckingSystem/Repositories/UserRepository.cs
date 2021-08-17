@@ -1,4 +1,4 @@
-﻿using CarparkAvailabilityCheckingSystem.Models;
+﻿using CarparkAvailabilityCheckingSystem.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -35,5 +35,12 @@ namespace CarparkAvailabilityCheckingSystem.Repositories
         {
             return await _context.Users.FindAsync(id);
         }
+
+        public bool CheckEmailExist(User user)
+        {
+            return _context.Users.Any(x => x.Email == user.Email);
+        }
+
+
     }
 }

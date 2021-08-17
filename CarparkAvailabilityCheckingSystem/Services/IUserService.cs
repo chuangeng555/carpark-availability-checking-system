@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CarparkAvailabilityCheckingSystem.Models;
+using CarparkAvailabilityCheckingSystem.Entities;
 
 namespace CarparkAvailabilityCheckingSystem.Services
 {
@@ -11,7 +11,7 @@ namespace CarparkAvailabilityCheckingSystem.Services
     {
         Task<IEnumerable<User>> GetAllUsers();
 
-        Task<User> CreateUser(User user);
+        Task<User> CreateUser(User user, string password);
 
         Task<User> GetUser(Guid id);
 
