@@ -6,10 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using CarparkAvailabilityCheckingSystem.Services;
 using CarparkAvailabilityCheckingSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarparkAvailabilityCheckingSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
+    [Route("api/carpark")]
     [ApiController]
     public class CarparkController : ControllerBase
     {
@@ -20,7 +22,7 @@ namespace CarparkAvailabilityCheckingSystem.Controllers
             _carparkService = carparkService;
         }
 
-        [HttpGet]
+        [HttpGet("getCarparkAvailability")]
         public async Task<CarparkModel> GetUsers()
         {
             var result = await _carparkService.GetCarparkAvailability();

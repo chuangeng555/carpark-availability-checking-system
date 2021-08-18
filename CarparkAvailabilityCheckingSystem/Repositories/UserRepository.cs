@@ -41,6 +41,11 @@ namespace CarparkAvailabilityCheckingSystem.Repositories
             return _context.Users.Any(x => x.Email == user.Email);
         }
 
+        public User GetUser(string email)
+        {
+            var user = _context.Users.SingleOrDefault(x => x.Email== email);
+            return user;
+        }
 
     }
 }

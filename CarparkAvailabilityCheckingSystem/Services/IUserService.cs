@@ -15,6 +15,7 @@ namespace CarparkAvailabilityCheckingSystem.Services
 
         Task<User> GetUser(Guid id);
 
+        User Authenticate(string email, string password);
 
     }
 }

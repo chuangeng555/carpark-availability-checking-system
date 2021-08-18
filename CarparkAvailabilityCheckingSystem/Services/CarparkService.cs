@@ -15,7 +15,6 @@ namespace CarparkAvailabilityCheckingSystem.Services
 
         private const string API_URL = "https://api.data.gov.sg/v1/transport/carpark-availability";
 
-
         public async Task<CarparkModel> GetCarparkAvailability()
         {
             CarparkModel CarParkInfo = new CarparkModel();
@@ -23,6 +22,7 @@ namespace CarparkAvailabilityCheckingSystem.Services
             {
                 client.BaseAddress = new Uri(API_URL);
                 client.DefaultRequestHeaders.Clear();
+                
                 //Define request data format
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 
@@ -35,7 +35,6 @@ namespace CarparkAvailabilityCheckingSystem.Services
 
                     //Deserializing the response recieved from web api and storing into the Carpark Model
                     CarParkInfo = JsonConvert.DeserializeObject<CarparkModel>(CarResponse);
-
                 }
 
                 return CarParkInfo;

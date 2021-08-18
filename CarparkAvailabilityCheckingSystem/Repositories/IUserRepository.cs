@@ -12,8 +12,8 @@ namespace CarparkAvailabilityCheckingSystem.Repositories
         Task<IEnumerable<User>> Get();
         Task<User> Create(User user);
         Task<User> Get(Guid id);
-
         bool CheckEmailExist(User user);
 
+        User GetUser(string email);
     }
 }
