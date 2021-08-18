@@ -32,8 +32,10 @@ namespace CarparkAvailabilityCheckingSystem
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ICarparkService ,CarparkService>();
+
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

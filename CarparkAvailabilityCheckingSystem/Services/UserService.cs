@@ -17,6 +17,16 @@ namespace CarparkAvailabilityCheckingSystem.Services
             _userRepo = userRepo;
         }
 
+
+        /** 
+         * Check if FirstName, LastName, Email and Password is not empty
+         * If Contact exist, make sure it is numeric and exactly 8 digits 
+         * Check if FirstName and LastName contains alphabets only 
+         * Check for alphanumeric characters and mininum 8 characters for password
+         * Check for Valid email & if user email exist in database or not
+         * 
+         * 
+         * **/
         public async Task<User> CreateUser(User user, string password)
         {
 
@@ -38,29 +48,31 @@ namespace CarparkAvailabilityCheckingSystem.Services
                 throw new ApplicationException("Contact number should be 8 digits");
             }
 
-            //check if firstname , lastname not empty 
             if (string.IsNullOrWhiteSpace(user.FirstName) || string.IsNullOrWhiteSpace(user.LastName))
             {
 
                 throw new ApplicationException("Please key in FirstName and LastName");
             }
 
-            //check if firstname and lastname strictly alphabets 
 
             if (!Regex.IsMatch(user.FirstName, @"^[a-zA-Z]+$") || !Regex.IsMatch(user.LastName, @"^[a-zA-Z]+$"))
             {
                 throw new ApplicationException("Please key in only alphabets for First and Last Name");
             }
 
-            //email and password are present, contact optional
             if (string.IsNullOrWhiteSpace(password))
             {
                 throw new ApplicationException("Please key in password");
             }
             
-            if (password.Length < 9)
+            if (password.Length < 8)
             {
-                throw new ApplicationException("Please key password more than 8 characters");
+                throw new ApplicationException("Please key 8 characters or more for password");
+            }
+
+            if (!Regex.IsMatch(password, @"^[a-zA-Z0-9]+$"))
+            {
+                throw new ApplicationException("Please key in alphanumeric characters for password");
             }
 
             if (string.IsNullOrWhiteSpace(user.Email))
@@ -88,7 +100,6 @@ namespace CarparkAvailabilityCheckingSystem.Services
             user.PasswordSalt = passwordSalt;
 
             var createdUser = await _userRepo.Create(user);
-
 
             return createdUser;
         }

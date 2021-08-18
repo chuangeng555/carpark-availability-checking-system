@@ -26,6 +26,7 @@ namespace CarparkAvailabilityCheckingSystem.Controllers
             _userService = userService;
         }
 
+
         [HttpGet]
         public async Task<IList<UserModel>> GetUsers()
         {
@@ -57,6 +58,7 @@ namespace CarparkAvailabilityCheckingSystem.Controllers
                 return BadRequest(new { message = ae.Message });
             }
         }
+
 
     }
 }
