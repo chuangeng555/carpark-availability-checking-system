@@ -9,6 +9,7 @@ Proxy server to obtain carpark availability data in Singapore, using C#, ASP.NET
 Objective: 
 - Familiarize with Repository-Service Pattern
 - Backend MVC 
+- Role of Proxy server 
 ```
 ## Setup
 
