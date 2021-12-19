@@ -3,7 +3,8 @@
 ## Information 
 
 ```bash
-Proxy server to obtain carpark availability data in Singapore, using C#, ASP.NET Core, Entity Framework (ORM) and MySQL
+Proxy server to obtain carpark availability data in Singapore, using C#, ASP.NET Core, Entity Framework
+and MySQL
 
 Objective: 
 - Familiarize with Repository-Service Pattern
