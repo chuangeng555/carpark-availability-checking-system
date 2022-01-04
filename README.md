@@ -10,6 +10,7 @@ Objective:
 - Familiarize with Repository-Service Pattern
 - Backend MVC 
 - Role of Proxy server 
+- Microsoft stack
 ```
 ## Setup
 
